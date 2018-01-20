@@ -12,6 +12,7 @@ package com.whizzosoftware.wzwave.node.generic;
 import com.whizzosoftware.wzwave.commandclass.BasicCommandClass;
 import com.whizzosoftware.wzwave.commandclass.BinarySensorCommandClass;
 import com.whizzosoftware.wzwave.commandclass.CommandClass;
+import com.whizzosoftware.wzwave.controller.ZWaveControllerContext;
 import com.whizzosoftware.wzwave.node.NodeInfo;
 import com.whizzosoftware.wzwave.node.NodeListener;
 import com.whizzosoftware.wzwave.node.ZWaveNode;
@@ -51,7 +52,7 @@ public class BinarySensor extends ZWaveNode {
     }
 
     @Override
-    protected void refresh(boolean deferIfNotListening) {
+    protected void refresh(ZWaveControllerContext context, boolean deferIfNotListening) {
 //        queueDataFrame(BinarySensorCommandClass.createGetv1(getNodeId()));
     }
 

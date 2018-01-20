@@ -9,6 +9,7 @@
 */
 package com.whizzosoftware.wzwave.node.specific;
 
+import com.whizzosoftware.wzwave.controller.ZWaveControllerContext;
 import com.whizzosoftware.wzwave.node.NodeInfo;
 import com.whizzosoftware.wzwave.node.NodeListener;
 import com.whizzosoftware.wzwave.node.generic.StaticController;
@@ -31,7 +32,7 @@ public class PCController extends StaticController {
     }
 
     @Override
-    protected void refresh(boolean deferIfNotListening) {
+    protected void refresh(ZWaveControllerContext context, boolean deferIfNotListening) {
 
     }
 }

@@ -12,6 +12,8 @@ package com.whizzosoftware.wzwave.node.generic;
 import com.whizzosoftware.wzwave.commandclass.BasicCommandClass;
 import com.whizzosoftware.wzwave.commandclass.BinarySwitchCommandClass;
 import com.whizzosoftware.wzwave.commandclass.CommandClass;
+import com.whizzosoftware.wzwave.controller.ZWaveControllerContext;
+import com.whizzosoftware.wzwave.frame.DataFrame;
 import com.whizzosoftware.wzwave.node.NodeInfo;
 import com.whizzosoftware.wzwave.node.NodeListener;
 import com.whizzosoftware.wzwave.node.ZWaveEndpoint;
@@ -43,9 +45,10 @@ public class BinarySwitch extends ZWaveNode {
     }
 
     @Override
-    protected void refresh(boolean deferIfNotListening) {
-        // TODO
-//        sendDataFrame(BinarySwitchCommandClass.createGetv1(getNodeId()), deferIfNotListening);
+    protected void refresh(ZWaveControllerContext context, boolean deferIfNotListening) {
+        BinarySwitchCommandClass cc = (BinarySwitchCommandClass)this.getCommandClass(BinarySwitchCommandClass.ID);
+        DataFrame dataFrame = cc.createGet(this.getNodeId());
+        sendDataFrame(context, dataFrame);
     }
 
     static public Boolean isOn(ZWaveEndpoint endpoint) {

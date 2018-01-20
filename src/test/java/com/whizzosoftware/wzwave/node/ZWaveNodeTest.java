@@ -10,6 +10,7 @@
 package com.whizzosoftware.wzwave.node;
 
 import com.whizzosoftware.wzwave.controller.MockZWaveControllerContext;
+import com.whizzosoftware.wzwave.controller.ZWaveControllerContext;
 import com.whizzosoftware.wzwave.node.generic.BinarySwitch;
 import com.whizzosoftware.wzwave.node.specific.BinaryPowerSwitch;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class ZWaveNodeTest {
         }
 
         @Override
-        protected void refresh(boolean deferIfNotListening) {
+        protected void refresh(ZWaveControllerContext context, boolean deferIfNotListening) {
 
         }
     }

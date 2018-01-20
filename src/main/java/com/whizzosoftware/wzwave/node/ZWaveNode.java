@@ -150,7 +150,7 @@ abstract public class ZWaveNode extends ZWaveEndpoint {
         }
     }
 
-    abstract protected void refresh(boolean deferIfNotListening);
+    abstract protected void refresh(ZWaveControllerContext context, boolean deferIfNotListening);
 
     /**
      * Called when an application command message is received for this specific node.
@@ -252,7 +252,7 @@ abstract public class ZWaveNode extends ZWaveEndpoint {
 
             default:
                 logger.trace("Unsolicited ApplicationUpdate received; refreshing node");
-                refresh(false);
+                refresh(context, false);
                 break;
         }
     }
