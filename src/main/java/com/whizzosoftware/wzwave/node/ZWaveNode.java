@@ -252,6 +252,7 @@ abstract public class ZWaveNode extends ZWaveEndpoint {
 
             default:
                 logger.trace("Unsolicited ApplicationUpdate received; refreshing node");
+                setState(context, ZWaveNodeState.RetrieveStatePending);
                 refresh(context, false);
                 break;
         }

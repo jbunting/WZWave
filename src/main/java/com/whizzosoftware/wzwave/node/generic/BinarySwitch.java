@@ -46,9 +46,8 @@ public class BinarySwitch extends ZWaveNode {
 
     @Override
     protected void refresh(ZWaveControllerContext context, boolean deferIfNotListening) {
-        BinarySwitchCommandClass cc = (BinarySwitchCommandClass)this.getCommandClass(BinarySwitchCommandClass.ID);
-        DataFrame dataFrame = cc.createGet(this.getNodeId());
-        sendDataFrame(context, dataFrame);
+        // TODO
+//        sendDataFrame(BinarySwitchCommandClass.createGetv1(getNodeId()), deferIfNotListening);
     }
 
     static public Boolean isOn(ZWaveEndpoint endpoint) {
