@@ -158,10 +158,10 @@ public class NettyZWaveController implements ZWaveController, ZWaveControllerCon
             Bootstrap bootstrap = new Bootstrap();
             eventLoopGroup = new OioEventLoopGroup();
             bootstrap.group(eventLoopGroup);
-            bootstrap.channel(JSerialCommChannel.class);
-            bootstrap.handler(new ChannelInitializer<JSerialCommChannel>() {
+            bootstrap.channel(BetterJSerialCommChannel.class);
+            bootstrap.handler(new ChannelInitializer<BetterJSerialCommChannel>() {
                 @Override
-                protected void initChannel(JSerialCommChannel channel) throws Exception {
+                protected void initChannel(BetterJSerialCommChannel channel) throws Exception {
                     NettyZWaveController.this.channel = channel;
                     channel.config().setBaudrate(115200);
                     channel.config().setDatabits(8);
