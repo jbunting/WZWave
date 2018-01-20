@@ -9,6 +9,10 @@
 */
 package com.whizzosoftware.wzwave.commandclass;
 
+import com.whizzosoftware.wzwave.node.ZWaveEndpoint;
+
+import java.util.ServiceLoader;
+
 /**
  * Convenience factory class that creates CommandClass instances from a command class ID byte.
  *
@@ -48,7 +52,68 @@ public class CommandClassFactory {
             case WakeUpCommandClass.ID:
                 return new WakeUpCommandClass();
             default:
+                ServiceLoader<CommandClassProvider> providers = ServiceLoader.load(CommandClassProvider.class, CommandClassProvider.class.getClassLoader());
+                for (CommandClassProvider provider: providers) {
+                    if (provider.ccId() == commandClassId) {
+                        return provider.provide();
+                    }
+                }
                 return null;
+        }
+    }
+
+    public static <CC extends CommandClass> CC getCommandClass(ZWaveEndpoint node, Class<CC> commandClass) {
+        byte ccId = getCommandClassId(commandClass);
+        if (ccId >= 0 && node.hasCommandClass(ccId)) {
+            return commandClass.cast(node.getCommandClass(ccId));
+        }
+        return null;
+    }
+
+    public static boolean hasCommandClass(ZWaveEndpoint node, Class<? extends CommandClass> commandClass) {
+        byte ccId = getCommandClassId(commandClass);
+        return node.hasCommandClass(ccId);
+    }
+
+    private static byte getCommandClassId(Class<? extends CommandClass> commandClass) {
+        if (commandClass == AlarmCommandClass.class) {
+            return AlarmCommandClass.ID;
+        } else if (commandClass == AlarmSensorCommandClass.class) {
+            return AlarmSensorCommandClass.ID;
+        } else if (commandClass == BasicCommandClass.class) {
+            return BasicCommandClass.ID;
+        } else if (commandClass == BatteryCommandClass.class) {
+            return BatteryCommandClass.ID;
+        } else if (commandClass == BinarySensorCommandClass.class) {
+            return BinarySensorCommandClass.ID;
+        } else if (commandClass == BinarySwitchCommandClass.class) {
+            return BinarySwitchCommandClass.ID;
+        } else if (commandClass == ColorControlCommandClass.class) {
+            return ColorControlCommandClass.ID;
+        } else if (commandClass == ManufacturerSpecificCommandClass.class) {
+            return ManufacturerSpecificCommandClass.ID;
+        } else if (commandClass == MeterCommandClass.class) {
+            return MeterCommandClass.ID;
+        } else if (commandClass == MultiInstanceCommandClass.class) {
+            return MultiInstanceCommandClass.ID;
+        } else if (commandClass == MultilevelSensorCommandClass.class) {
+            return MultilevelSensorCommandClass.ID;
+        } else if (commandClass == MultilevelSwitchCommandClass.class) {
+            return MultilevelSwitchCommandClass.ID;
+        } else if (commandClass == NoOperationCommandClass.class) {
+            return NoOperationCommandClass.ID;
+        } else if (commandClass == VersionCommandClass.class) {
+            return VersionCommandClass.ID;
+        } else if (commandClass == WakeUpCommandClass.class) {
+            return WakeUpCommandClass.ID;
+        } else {
+            ServiceLoader<CommandClassProvider> providers = ServiceLoader.load(CommandClassProvider.class, CommandClassProvider.class.getClassLoader());
+            for (CommandClassProvider provider: providers) {
+                if (provider.ccType() == commandClass) {
+                    return provider.ccId();
+                }
+            }
+            return -1;
         }
     }
 }
