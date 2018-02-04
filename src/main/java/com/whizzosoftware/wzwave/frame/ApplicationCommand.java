@@ -47,7 +47,7 @@ public class ApplicationCommand extends DataFrame {
         this.nodeId = buffer.readByte();
 
         byte cmdLength = buffer.readByte();
-        commandClassBytes = buffer.readBytes(cmdLength).array();
+        commandClassBytes = ByteUtil.readBytes(buffer, cmdLength);
     }
 
     public byte getNodeId() {

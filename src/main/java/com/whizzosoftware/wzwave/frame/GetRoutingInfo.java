@@ -11,6 +11,7 @@ package com.whizzosoftware.wzwave.frame;
 
 import com.whizzosoftware.wzwave.channel.ZWaveChannelContext;
 import com.whizzosoftware.wzwave.frame.transaction.DataFrameTransaction;
+import com.whizzosoftware.wzwave.util.ByteUtil;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -29,7 +30,7 @@ public class GetRoutingInfo extends DataFrame {
 
     public GetRoutingInfo(ByteBuf buffer) {
         super(buffer);
-        nodeMask = buffer.readBytes(29).array();
+        nodeMask = ByteUtil.readBytes(buffer, 29);
     }
 
     public byte[] getNodeMask() {

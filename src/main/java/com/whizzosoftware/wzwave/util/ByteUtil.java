@@ -13,6 +13,7 @@ import com.whizzosoftware.wzwave.frame.Frame;
 import io.netty.buffer.ByteBuf;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A utility class for various byte related functions.
@@ -25,6 +26,16 @@ public class ByteUtil {
     static public String createString(Frame message) {
         byte[] b = message.getBytes();
         return createString(b, b.length);
+    }
+
+    static public String readString(ByteBuf buf, int length) {
+        return new String(readBytes(buf, length), StandardCharsets.UTF_8);
+    }
+
+    static public byte[] readBytes(ByteBuf buf, int length) {
+        byte[] bytes = new byte[length];
+        buf.readBytes(bytes);
+        return bytes;
     }
 
     static public String createString(byte[] bytes, int length) {

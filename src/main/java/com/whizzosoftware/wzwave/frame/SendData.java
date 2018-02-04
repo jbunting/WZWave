@@ -69,7 +69,7 @@ public class SendData extends DataFrame {
         } else if (dataFrameLength > 5) {
             this.nodeId = buffer.readByte();
             byte dataLength = buffer.readByte();
-            this.sendData = buffer.readBytes(dataLength).array();
+            this.sendData = ByteUtil.readBytes(buffer, dataLength);
             this.tx = buffer.readByte();
             this.callbackId = buffer.readByte();
         }

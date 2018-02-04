@@ -7,6 +7,7 @@
  *******************************************************************************/
 package com.whizzosoftware.wzwave.node;
 
+import com.whizzosoftware.wzwave.util.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import java.util.Arrays;
 
@@ -40,7 +41,7 @@ public class NodeInfo {
         basicDeviceClass = buffer.readByte();
         genericDeviceClass = buffer.readByte();
         specificDeviceClass = buffer.readByte();
-        commandClasses = buffer.readBytes(nodeInfoLength - 3).array();
+        commandClasses = ByteUtil.readBytes(buffer, nodeInfoLength - 3);
     }
 
     public byte getNodeId() {

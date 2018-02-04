@@ -12,6 +12,7 @@ package com.whizzosoftware.wzwave.frame;
 import com.whizzosoftware.wzwave.channel.ZWaveChannelContext;
 import com.whizzosoftware.wzwave.frame.transaction.DataFrameTransaction;
 import com.whizzosoftware.wzwave.frame.transaction.RequestResponseTransaction;
+import com.whizzosoftware.wzwave.util.ByteUtil;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -37,7 +38,7 @@ public class Version extends DataFrame {
 
     public Version(ByteBuf buffer) {
         super(buffer);
-        libraryVersion = new String(buffer.readBytes(12).array()).trim();
+        libraryVersion = ByteUtil.readString(buffer, 12).trim();
         libraryType = buffer.readByte();
     }
 
