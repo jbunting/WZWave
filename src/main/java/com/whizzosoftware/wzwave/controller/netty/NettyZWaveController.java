@@ -37,6 +37,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.Executors;
 
 /**
  * A Netty implementation of a ZWaveController.
@@ -156,7 +157,7 @@ public class NettyZWaveController implements ZWaveController, ZWaveControllerCon
         if (channel == null) {
             // set up Netty bootstrap
             Bootstrap bootstrap = new Bootstrap();
-            eventLoopGroup = new OioEventLoopGroup();
+            eventLoopGroup = new OioEventLoopGroup(0, new ZWaveThreadFactory());
             bootstrap.group(eventLoopGroup);
             bootstrap.channel(BetterJSerialCommChannel.class);
             bootstrap.handler(new ChannelInitializer<BetterJSerialCommChannel>() {
