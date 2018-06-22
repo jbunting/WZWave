@@ -9,7 +9,7 @@
     <url>https://github.com/whizzosoftware/WZWave</url>
     <licenses>
         <license>
-            <name>Eclise Public License, Version 1.0</name>
+            <name>Eclipse Public License, Version 1.0</name>
             <url>https://www.eclipse.org/legal/epl-v10.html</url>
             <distribution>repo</distribution>
         </license>
@@ -95,6 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -107,6 +108,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -166,11 +168,19 @@
         </plugins>
     </build>
     <distributionManagement>
+        <snapshotRepository>
+            <id>oss-jfrog-artifactory-snapshots</id>
+            <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+        </snapshotRepository>
         <repository>
             <id>bintray</id>
             <url>https://api.bintray.com/maven/whizzosoftware/maven/wzwave</url>
         </repository>
     </distributionManagement>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
     <profiles>
         <profile>
             <id>release-sign-artifacts</id>
